@@ -101,3 +101,16 @@ void pop(stack_t **stack, unsigned int line_number)
 	*stack = (*stack)->prev;
 	free(remove);
 }
+
+/**
+ * swap - move the 
+ */
+void swap(stack_t **stack, unsigned int line_number)
+{
+	int a, b;
+
+	a=(*stack)->n;
+	b=(*stack)->prev->n;
+	(*stack)->n = b;
+	(*stack)->prev->n = a;
+}

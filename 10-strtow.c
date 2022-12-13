@@ -53,8 +53,7 @@ char **strtow(char *str)
 
 	words = find_words(str);	/* find the words in string */
 	len = _strlen(str);	/* find the length of string */
-	/* malloc for the size of the array i.e no of words */
-	if (words == 0)
+	if (words == 0)  /* malloc for the size of the array i.e no of words */
 		return (NULL);
 	array = malloc((words + 1) * sizeof(char *));
 	if (array == NULL)
@@ -63,7 +62,6 @@ char **strtow(char *str)
 		dprintf(2, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-
 	for (i = 0; i <= len; i++)
 	{
 		if ((str[i] == ' ' || str[i] == '\0'))
@@ -82,7 +80,6 @@ char **strtow(char *str)
 			*tmp = '\0';	/* set last char of word to null byte */
 			/* assign next element to the address of new word */
 			array[j] = tmp - letters;
-
 			j++;	/* increment j for next element of array */
 			letters = 0;	/* set the letter count to 0 */
 		}

@@ -3,7 +3,7 @@
 /**
  * free_list - frees a doubly linked list
  *
- * @head: head node of the list
+ * @tail: head node of the list
  * Return: void
  */
 void free_list(stack_t *tail)

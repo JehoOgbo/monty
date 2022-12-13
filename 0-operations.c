@@ -103,14 +103,31 @@ void pop(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * swap - move the 
+ * swap - swap the top two elements of the stack
+ * @stack: address of last element of the stack
+ * @line_number: line number in the bytecode file
+ *
+ * Return: void
  */
 void swap(stack_t **stack, unsigned int line_number)
 {
 	int a, b;
 
-	a=(*stack)->n;
-	b=(*stack)->prev->n;
+	if (*stack == NULL)
+	{
+		dprintf(2, "L%d: can't swap, stack too short\n", line_number);
+		free_list(*stack);
+		exit(EXIT_FAILURE);
+	}
+	if ((*stack)->prev == NULL)
+	{
+		dprintf(2, "L%d: can't swap, stack too short\n", line_number);
+		free_list(*stack);
+		exit(EXIT_FAILURE);
+	}
+
+	a = (*stack)->n;
+	b = (*stack)->prev->n;
 	(*stack)->n = b;
 	(*stack)->prev->n = a;
 }

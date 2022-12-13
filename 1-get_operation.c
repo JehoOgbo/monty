@@ -1,0 +1,51 @@
+#include "header.h"
+#include "global.h"
+
+/**
+ * get_ops - gets the operation for the given op code
+ * @s: the string which has the command
+ * @l: line number in bytecode file
+ *
+ * Return: a pointer to the function corresponding to given command
+ */
+void (*get_ops(char *s, int l))(stack_t **, unsigned int)
+{
+	instruction_t ops[] = {
+		{"push", push},
+		{"pall", pall},
+		{"pint", pint},
+		{"pop", pop},
+		{NULL, NULL}
+	};
+	int i = 0, len;
+	char **array;
+
+	len = strlen(s);
+	s[len - 1] = '\0';
+
+	array = strtow(s);
+	if (array == NULL)
+		return (NULL);
+	if (array[1])
+	{
+		if (is_numeric(array[1]) == 0)
+			holder = atoi(array[1]);
+		else
+			holder = -78848;
+	}
+
+	while (ops[i].opcode)
+	{
+		if (strcmp(array[0], ops[i].opcode) == 0)
+		{
+			free_array(array);
+			return (ops[i].f);
+		}
+		i++;
+	}
+	holder = -78848;
+	free_array(array);
+	free_list(stack);
+	dprintf(2, "L%d: unknown instruction %s\n", l, s);
+	exit(EXIT_FAILURE);
+}

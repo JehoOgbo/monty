@@ -58,7 +58,7 @@ char **strtow(char *str)
 	if (array == NULL)
 	{
 		dprintf(2, "Error: malloc failed\n");
-		free_list(stack);
+		free_list(bag.stack);
 		exit(EXIT_FAILURE);
 	}
 	for (i = 0; i <= len; i++)

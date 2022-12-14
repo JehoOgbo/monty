@@ -10,9 +10,9 @@
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current;
-	int num = holder;
+	int num = bag.holder;
 
-	if (holder == -78848)
+	if (num == -78848)
 	{
 		dprintf(2, "L%d: usage: push integer\n", line_number);
 		free_list(*stack);
@@ -31,10 +31,10 @@ void push(stack_t **stack, unsigned int line_number)
 	{
 		current->prev = NULL;
 		*stack = current;
-		head = current;
+		bag.head = current;
 		return;
 	}
-	if (on_off)
+	if (bag.on_off)
 	{
 		current->prev = *stack;
 		(*stack)->next = current;
@@ -43,9 +43,9 @@ void push(stack_t **stack, unsigned int line_number)
 	else
 	{
 		current->prev = NULL;
-		current->next = head;
-		(head)->prev = current;
-		head = current;
+		current->next = bag.head;
+		bag.head->prev = current;
+		bag.head = current;
 	}
 }
 

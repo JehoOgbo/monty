@@ -1,5 +1,5 @@
-#ifndef HEADER_H
-#define HEADER_H
+#ifndef MONTY_H
+#define MONTY_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,13 +39,27 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-extern int holder;
-extern stack_t *stack;
-extern stack_t *head;
-extern short int on_off;
+/**
+ * struct carry_s - global variables to be used
+ * @head: pointer to the first element of the stack
+ * @holder: value to be inputed into stack
+ * @on_off: switch for stack and queue data handling
+ * @stack: pointer to the last element of stack
+ */
+typedef struct carry_s
+{
+	stack_t *head;
+	int holder;
+	short int on_off;
+	stack_t *stack;
+} carry_t;
 
+extern carry_t bag;
+
+/* gets function pointer to be used */
 void (*get_ops(char *s, int l)) (stack_t **, unsigned int);
 
+/* functions to be executed depending on opcode in file */
 void pall(stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
@@ -69,4 +83,4 @@ void free_array(char **array);
 void free_list(stack_t *tail);
 int is_numeric(char *s);
 
-#endif /* HEADER_H */
+#endif /* MONTY_H */

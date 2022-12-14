@@ -11,7 +11,7 @@ void stackd(stack_t **stack, unsigned int line_number)
 {
 	(void) stack;
 	(void) line_number;
-	on_off = 1;
+	bag.on_off = 1;
 }
 
 /**
@@ -26,5 +26,5 @@ void queue(stack_t **stack, unsigned int line_number)
 {
 	(void) stack;
 	(void) line_number;
-	on_off = 0;
+	bag.on_off = 0;
 }

@@ -114,11 +114,11 @@ void rotl(stack_t **stack, unsigned int line_number)
 	sec_to_last = last->prev;
 	sec_to_last->next = NULL;
 	last->prev = NULL;
-	last->next = head;
-	head->prev = last;
+	last->next = bag.head;
+	(bag.head)->prev = last;
 
 	*stack = sec_to_last;
-	head = last;
+	bag.head = last;
 }
 
 /**
@@ -138,12 +138,12 @@ void rotr(stack_t **stack, unsigned int line_number)
 	if ((*stack)->prev == NULL)
 		return;
 	(void) line_number;
-	second = head->next;
+	second = (bag.head)->next;
 	second->prev = NULL;
-	head->next = NULL;
-	head->prev = last;
-	last->next = head;
+	(bag.head)->next = NULL;
+	(bag.head)->prev = last;
+	last->next = (bag.head);
 
-	*stack = head;
-	head = second;
+	*stack = (bag.head);
+	(bag.head) = second;
 }

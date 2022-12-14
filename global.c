@@ -1,6 +1,3 @@
 #include "monty.h"
 
-int holder = -78848;
-stack_t *stack;
-short int on_off = 1;
-stack_t *head;
+carry_t bag = {NULL, -78848, 1, NULL};

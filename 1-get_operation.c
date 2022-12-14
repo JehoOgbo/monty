@@ -32,12 +32,12 @@ void (*get_ops(char *s, int l))(stack_t **, unsigned int)
 	if (array[1])
 	{
 		if (is_numeric(array[1]) == 0)
-			holder = atoi(array[1]);
+			bag.holder = atoi(array[1]);
 		else
-			holder = -78848;
+			bag.holder = -78848;
 	}
 	else
-		holder = -78848;
+		bag.holder = -78848;
 	while (ops[i].opcode)
 	{
 		if (strcmp(array[0], ops[i].opcode) == 0)
@@ -47,9 +47,9 @@ void (*get_ops(char *s, int l))(stack_t **, unsigned int)
 		}
 		i++;
 	}
-	holder = -78848;
+	bag.holder = -78848;
 	dprintf(2, "L%d: unknown instruction %s\n", l, array[0]);
-	free_list(stack);
+	free_list(bag.stack);
 	free_array(array);
 	exit(EXIT_FAILURE);
 }

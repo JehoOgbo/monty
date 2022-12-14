@@ -37,6 +37,8 @@ void (*get_ops(char *s, int l))(stack_t **, unsigned int)
 		else
 			holder = -78848;
 	}
+	else
+		holder = -78848;
 	while (ops[i].opcode)
 	{
 		if (strcmp(array[0], ops[i].opcode) == 0)

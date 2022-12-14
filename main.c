@@ -15,6 +15,7 @@ int main(int argc, char **argv)
 	char *buffer = NULL;
 	size_t n, line_number = 1;
 	stack_t *stack = NULL;
+	/**head = NULL;*/
 
 	if (argc != 2)
 	{

@@ -14,7 +14,8 @@ void (*get_ops(char *s, int l))(stack_t **, unsigned int)
 		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
 		{"swap", swap}, {"add", add}, {"nop", nop}, {"sub", sub},
 		{"div", divide}, {"mul", mul}, {"mod", mod}, {"pchar", pchar},
-		{"pstr", pstr}, {"rotl", rotl}, {NULL, NULL}
+		{"pstr", pstr}, {"rotl", rotl}, {"rotr", rotr}, {"queue", queue},
+		{"stack", stackd}, {NULL, NULL}
 	};
 	int i = 0, len;
 	char **array;

@@ -29,7 +29,7 @@ void mod(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	a = new->n;
-	if (a == 0 )
+	if (a == 0)
 	{
 		dprintf(2, "L%d: division by zero\n", line_number);
 		free_list(*stack);
@@ -105,24 +105,46 @@ void pstr(stack_t **stack, unsigned int line_number)
  */
 void rotl(stack_t **stack, unsigned int line_number)
 {
-	stack_t *use, *last = *stack, *sec_to_last;
+	stack_t *last = *stack, *sec_to_last;
 
 	if (*stack == NULL)
 		return;
 	if ((*stack)->prev == NULL)
 		return;
 	(void) line_number;
-	use = *stack;
-	/* get the first element */
-	while (use->prev)
-	{
-		use = use->prev;
-	}
 	sec_to_last = last->prev;
 	sec_to_last->next = NULL;
 	last->prev = NULL;
-	last->next = use;
-	use->prev = last;
+	last->next = head;
+	head->prev = last;
 
 	*stack = sec_to_last;
+	head = last;
+}
+
+/**
+ * rotr - rotates the stack to the bottom
+ * @stack: pointer to the last element of stack
+ * @line_number: line number in the byte code
+ *
+ * Description: make the bottom of the stack the top, others adjust
+ * Return: void
+ */
+void rotr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *last = *stack, *second;
+
+	if (*stack == NULL)
+		return;
+	if ((*stack)->prev == NULL)
+		return;
+	(void) line_number;
+	second = head->next;
+	second->prev = NULL;
+	head->next = NULL;
+	head->prev = last;
+	last->next = head;
+
+	*stack = head;
+	head = second;
 }

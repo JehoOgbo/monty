@@ -49,8 +49,8 @@ void (*get_ops(char *s, int l))(stack_t **, unsigned int)
 		i++;
 	}
 	holder = -78848;
-	free_array(array);
 	free_list(stack);
-	dprintf(2, "L%d: unknown instruction %s\n", l, s);
+	dprintf(2, "L%d: unknown instruction %s\n", l, array[0]);
+	free_array(array);
 	exit(EXIT_FAILURE);
 }

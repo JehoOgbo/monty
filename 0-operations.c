@@ -1,5 +1,4 @@
 #include "monty.h"
-#include "global.h"
 
 /**
  * push - pushes an element unto the bottom of a linked list

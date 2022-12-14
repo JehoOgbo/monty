@@ -1,5 +1,4 @@
 #include "monty.h"
-#include "global.h"
 
 /**
  * add - add the top two elements of the stack

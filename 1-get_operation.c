@@ -1,5 +1,4 @@
 #include "monty.h"
-#include "global.h"
 
 /**
  * get_ops - gets the operation for the given op code
@@ -49,8 +48,8 @@ void (*get_ops(char *s, int l))(stack_t **, unsigned int)
 		i++;
 	}
 	holder = -78848;
-	free_list(stack);
 	dprintf(2, "L%d: unknown instruction %s\n", l, array[0]);
+	free_list(stack);
 	free_array(array);
 	exit(EXIT_FAILURE);
 }

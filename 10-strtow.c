@@ -1,5 +1,4 @@
 #include "monty.h"
-#include "global.h"
 
 /**
  * find_words - finds the number of words in a str
@@ -58,8 +57,8 @@ char **strtow(char *str)
 	array = malloc((words + 1) * sizeof(char *));
 	if (array == NULL)
 	{
-		free_list(stack);
 		dprintf(2, "Error: malloc failed\n");
+		free_list(stack);
 		exit(EXIT_FAILURE);
 	}
 	for (i = 0; i <= len; i++)

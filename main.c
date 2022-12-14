@@ -1,5 +1,4 @@
 #include "monty.h"
-#include "global.h"
 
 /**
  * main - calls other functions

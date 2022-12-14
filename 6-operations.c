@@ -1,5 +1,4 @@
 #include "monty.h"
-#include "global.h"
 
 /**
  * stackd - sets the format of data to a stack (LIFO)

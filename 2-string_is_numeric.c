@@ -1,5 +1,4 @@
 #include "monty.h"
-#include "global.h"
 
 /**
  * is_numeric - checks if a string is made up only digits

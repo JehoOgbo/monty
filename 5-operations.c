@@ -1,5 +1,4 @@
 #include "monty.h"
-#include "global.h"
 
 /**
  * mod - computes the rest of division of second top element by top element

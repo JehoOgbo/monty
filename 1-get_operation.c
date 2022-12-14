@@ -11,19 +11,24 @@
 void (*get_ops(char *s, int l))(stack_t **, unsigned int)
 {
 	instruction_t ops[] = {
-		{"push", push}, {"pall", pall}, {"pint", pint},
-		{"pop", pop}, {"swap", swap}, {"add", add},
-		{"nop", nop}, {NULL, NULL}
+		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop},
+		{"swap", swap}, {"add", add}, {"nop", nop}, {"sub", sub},
+		{"div", divide}, {"mul", mul}, {"mod", mod}, {"pchar", pchar},
+		{"pstr", pstr}, {"rotl", rotl}, {NULL, NULL}
 	};
 	int i = 0, len;
 	char **array;
 
 	len = strlen(s);
 	s[len - 1] = '\0';
-
 	array = strtow(s);
 	if (array == NULL)
 		return (NULL);
+	if (array[0][0] == '#')
+	{
+		free_array(array);
+		return (NULL);
+	}
 	if (array[1])
 	{
 		if (is_numeric(array[1]) == 0)
@@ -31,7 +36,6 @@ void (*get_ops(char *s, int l))(stack_t **, unsigned int)
 		else
 			holder = -78848;
 	}
-
 	while (ops[i].opcode)
 	{
 		if (strcmp(array[0], ops[i].opcode) == 0)

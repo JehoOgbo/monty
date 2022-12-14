@@ -23,6 +23,7 @@ void push(stack_t **stack, unsigned int line_number)
 	if (current == NULL)
 	{
 		dprintf(2, "Error: malloc failed\n");
+		free_list(*stack);
 		exit(EXIT_FAILURE);
 	}
 	current->n = num;

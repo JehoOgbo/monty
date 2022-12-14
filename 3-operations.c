@@ -115,7 +115,7 @@ void divide(stack_t **stack, unsigned int line_number)
 	a = new->n;
 	if (a == 0)
 	{
-		dprintf(2, "L%d: can't div, division by zero\n", line_number);
+		dprintf(2, "L%d: division by zero\n", line_number);
 		free_list(*stack);
 		exit(EXIT_FAILURE);
 	}

@@ -1,5 +1,4 @@
-#include "header.h"
-#include "global.h"
+#include "monty.h"
 
 /**
  * free_array - frees an array of array

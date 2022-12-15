@@ -1,5 +1,4 @@
-#include "header.h"
-#include "global.h"
+#include "monty.h"
 
 /**
  * push - pushes an element unto the bottom of a linked list
@@ -11,9 +10,9 @@
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current;
-	int num = holder;
+	int num = bag.holder;
 
-	if (holder == -78848)
+	if (num == -78848)
 	{
 		dprintf(2, "L%d: usage: push integer\n", line_number);
 		free_list(*stack);
@@ -23,6 +22,7 @@ void push(stack_t **stack, unsigned int line_number)
 	if (current == NULL)
 	{
 		dprintf(2, "Error: malloc failed\n");
+		free_list(*stack);
 		exit(EXIT_FAILURE);
 	}
 	current->n = num;
@@ -31,11 +31,22 @@ void push(stack_t **stack, unsigned int line_number)
 	{
 		current->prev = NULL;
 		*stack = current;
+		bag.head = current;
 		return;
 	}
-	current->prev = *stack;
-	(*stack)->next = current;
-	*stack = current;
+	if (bag.on_off)
+	{
+		current->prev = *stack;
+		(*stack)->next = current;
+		*stack = current;
+	}
+	else
+	{
+		current->prev = NULL;
+		current->next = bag.head;
+		bag.head->prev = current;
+		bag.head = current;
+	}
 }
 
 /**
@@ -103,14 +114,31 @@ void pop(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * swap - move the 
+ * swap - swap the top two elements of the stack
+ * @stack: address of last element of the stack
+ * @line_number: line number in the bytecode file
+ *
+ * Return: void
  */
 void swap(stack_t **stack, unsigned int line_number)
 {
 	int a, b;
 
-	a=(*stack)->n;
-	b=(*stack)->prev->n;
+	if (*stack == NULL)
+	{
+		dprintf(2, "L%d: can't swap, stack too short\n", line_number);
+		free_list(*stack);
+		exit(EXIT_FAILURE);
+	}
+	if ((*stack)->prev == NULL)
+	{
+		dprintf(2, "L%d: can't swap, stack too short\n", line_number);
+		free_list(*stack);
+		exit(EXIT_FAILURE);
+	}
+
+	a = (*stack)->n;
+	b = (*stack)->prev->n;
 	(*stack)->n = b;
 	(*stack)->prev->n = a;
 }

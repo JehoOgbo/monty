@@ -1,0 +1,9 @@
+#ifndef GLOBAL_H
+#define GLOBAL_H
+
+extern int holder;
+extern stack_t *stack;
+extern stack_t *head;
+extern short int on_off;
+
+#endif /* GLOBAL_H */

@@ -1,5 +1,4 @@
-#include "header.h"
-#include "global.h"
+#include "monty.h"
 
 /**
  * is_numeric - checks if a string is made up only digits

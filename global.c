@@ -1,5 +1,3 @@
-#include "header.h"
+#include "monty.h"
 
-int holder = -78848;
-char *buffer;
-stack_t *stack;
+carry_t bag = {NULL, -78848, 1, NULL};

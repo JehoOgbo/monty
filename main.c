@@ -1,5 +1,4 @@
-#include "header.h"
-#include "global.h"
+#include "monty.h"
 
 /**
  * main - calls other functions
@@ -14,7 +13,8 @@ int main(int argc, char **argv)
 	void (*func)(stack_t **, unsigned int);
 	char *buffer = NULL;
 	size_t n, line_number = 1;
-	stack_t *stack = NULL;
+	/*stack_t *stack = NULL;*/
+	/**head = NULL;*/
 
 	if (argc != 2)
 	{
@@ -33,11 +33,11 @@ int main(int argc, char **argv)
 		func = get_ops(buffer, line_number);
 		if (func == NULL)
 			continue;
-		func(&stack, line_number);
+		func(&(bag.stack), line_number);
 		line_number++;
 	}
 	free(buffer);
 	fclose(fpointer);
-	free_list(stack);
+	free_list(bag.stack);
 	return (0);
 }

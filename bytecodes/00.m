@@ -1,10 +1,16 @@
+queue
 push 1
 push 2
 push 3
 pall
-pop
+stack
+push 4
+push 5
+push 6
 pall
-pop
+add
 pall
-pop
+queue
+push 11111
+add
 pall

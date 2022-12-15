@@ -1,1 +1,1 @@
-This directory contains an interpreter for monty bytecode using the concepts of stacks and queues as well as doubly linked lists. Which is a project work done by Jehoshaphat and Peter (JP). 
+This directory contains an interpreter for monty bytecode using the concepts of stacks and queues as well as doubly linked lists. Which is a project work done by Jehoshaphat and Peter.

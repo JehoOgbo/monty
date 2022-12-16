@@ -31,9 +31,8 @@ int main(int argc, char **argv)
 	while (getline(&buffer, &n, fpointer) != -1)
 	{
 		func = get_ops(buffer, line_number);
-		if (func == NULL)
-			continue;
-		func(&(bag.stack), line_number);
+		if (func != NULL)
+			func(&(bag.stack), line_number);
 		line_number++;
 	}
 	free(buffer);

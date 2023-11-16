@@ -1,0 +1,1 @@
+This repository is an interpreter for the monty programming language with bytecodes such as push, pall, etc. This interpreter uses the concepts of FIFO and LIFO in queues and stacks respectively to make this interpreter and is easily interconverted from a queue to a stack and vice versa.

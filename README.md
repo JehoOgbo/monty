@@ -8,7 +8,7 @@ Monty byte code files
 
 Files containing Monty byte codes usually have the .m extension. Most of the industry uses this standard but it is not required by the specification of the language. There is not more than one instruction per line. There can be any number of spaces before or after the opcode and its argument:
 
-julien@ubuntu:~/monty$ cat -e bytecodes/000.m
+`julien@ubuntu:~/monty$ cat -e bytecodes/000.m
 push 0$
 push 1$
 push 2$
@@ -18,10 +18,10 @@ push 4$
     push 5    $
       push    6        $
 pall$
-julien@ubuntu:~/monty$
+julien@ubuntu:~/monty$ `
 Monty byte code files can contain blank lines (empty or made of spaces only, and any additional text after the opcode or its required argument is not taken into account:
 
-julien@ubuntu:~/monty$ cat -e bytecodes/001.m
+`julien@ubuntu:~/monty$ cat -e bytecodes/001.m
 push 0 Push 0 onto the stack$
 push 1 Push 1 onto the stack$
 $
@@ -37,8 +37,16 @@ $
       push    6        $
 $
 pall This is the end of our program. Monty is awesome!$
-julien@ubuntu:~/monty$
+julien@ubuntu:~/monty$`
 
+## Brainf*ck
+Brainfuck is an esoteric programming language created in 1993 by Swiss student Urban Müller. Designed to be extremely minimalistic, the language consists of only eight simple commands, a data pointer, and an instruction pointer.
+
+Brainfuck is an example of a so-called Turing tarpit: it can be used to write any program, but it is not practical to do so because it provides so little abstraction that the programs get very long or complicated. While Brainfuck is fully Turing-complete, it is not intended for practical use but to challenge and amuse programmers. Brainfuck requires one to break down commands into small and simple instructions.
+
+The language takes its name from the slang term brainfuck, which refers to things so complicated or unusual that they exceed the limits of one's understanding, as it was not meant or made for designing actual software but to challenge the boundaries of computer programming.
+
+Because the language's name contains profanity, many substitutes are used, such as brainfsck, branflakes, brainoof, brainfrick, BrainF, and BF.
 
 ### Functionalities of this interpreter
 * Push information u
@@ -60,6 +68,7 @@ This project is compiled/tested on Ubuntu 20.04 LTS using gcc compiler
 * clone this repository: `git clone "https://github.com/JehoOgbo/monty.git"`
 * Access monty directory: `cd monty`
 * Compile the interpreter: `gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty`
+* Install the brainf*ck interpreter to test *.bf files: `sudo apt-get install bf`
 
 ## Usage
 * Usage: monty file
@@ -81,7 +90,8 @@ This project is compiled/tested on Ubuntu 20.04 LTS using gcc compiler
 ## Data structures
 The following data structures are used for this project and are included in the header file
 
-`/**
+
+/**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
  * @prev: points to the previous element of the stack (or queue)
@@ -207,10 +217,14 @@ julien@ubuntu:~/monty$ ./monty bytecodes/09.m
 1
 julien@ubuntu:~/monty$ `
 
-[3-operations.c](#3-operations.c) - Implement the add, nop, sub, divide, mul functions
+[1-get_operations.c](1-get_operations.c)
+Contains function to select operation based on the user input
 
+[2-string_is_numeric.c](2-string_is_numeric.c)
+Contains function to ensure the arguments passed in for the interpreter are numeric based on the user input
+
+[3-operations.c](3-operations.c) - Implement the add, nop, sub, divide, mul functions
 The add opcode
-
 * The opcode add adds the top two elements of the stack.
 
 * Usage: add
@@ -234,11 +248,8 @@ julien@ubuntu:~/monty$ ./monty bytecodes/12.m
 julien@ubuntu:~/monty$ `
 
 The nop opcode
-
 * The opcode nop doesn’t do anything.
-
 * Usage: nop
-
 The sub opcode
 
 * The opcode sub subtracts the top element of the stack from the second top element of the stack.
@@ -281,75 +292,41 @@ The mul opcode
 * The result is stored in the second top element of the stack, and the top element is removed, so that at the end:
 * The top element of the stack contains the result
 * The stack is one element shorter
-  
-9. mod
-#advanced
-Score: 100.0% (Checks completed: 100.0%)
-Implement the mod opcode.
+
+[5-operations.c](5-operations.c) - Implement the following opcodes: mod, pchar, pstr, rotl, rotr
 
 The mod opcode
-
 The opcode mod computes the rest of the division of the second top element of the stack by the top element of the stack.
-
-Usage: mod
-If the stack contains less than two elements, print the error message L<line_number>: can't mod, stack too short, followed by a new line, and exit with the status EXIT_FAILURE
-The result is stored in the second top element of the stack, and the top element is removed, so that at the end:
-The top element of the stack contains the result
-The stack is one element shorter
-If the top element of the stack is 0, print the error message L<line_number>: division by zero, followed by a new line, and exit with the status EXIT_FAILURE
-Repo:
-
-GitHub repository: monty
-  
-10. comments
-#advanced
-Score: 100.0% (Checks completed: 100.0%)
-Every good language comes with the capability of commenting. When the first non-space character of a line is #, treat this line as a comment (don’t do anything).
-
-Repo:
-
-GitHub repository: monty
-  
-11. pchar
-#advanced
-Score: 100.0% (Checks completed: 100.0%)
-Implement the pchar opcode.
+* Usage: mod
+* If the stack contains less than two elements, print the error message L<line_number>: can't mod, stack too short, followed by a new line, and exit with the status EXIT_FAILURE
+* The result is stored in the second top element of the stack, and the top element is removed, so that at the end:
+* The top element of the stack contains the result
+* The stack is one element shorter
+* If the top element of the stack is 0, print the error message L<line_number>: division by zero, followed by a new line, and exit with the status EXIT_FAILURE
 
 The pchar opcode
-
-The opcode pchar prints the char at the top of the stack, followed by a new line.
-
-Usage: pchar
-The integer stored at the top of the stack is treated as the ascii value of the character to be printed
-If the value is not in the ascii table (man ascii) print the error message L<line_number>: can't pchar, value out of range, followed by a new line, and exit with the status EXIT_FAILURE
-If the stack is empty, print the error message L<line_number>: can't pchar, stack empty, followed by a new line, and exit with the status EXIT_FAILURE
-julien@ubuntu:~/monty$ cat bytecodes/28.m 
+* The opcode pchar prints the char at the top of the stack, followed by a new line.
+* Usage: pchar
+* The integer stored at the top of the stack is treated as the ascii value of the character to be printed
+* If the value is not in the ascii table (man ascii) print the error message L<line_number>: can't pchar, value out of range, followed by a new line, and exit with the status EXIT_FAILURE
+* If the stack is empty, print the error message L<line_number>: can't pchar, stack empty, followed by a new line, and exit with the status EXIT_FAILURE
+`julien@ubuntu:~/monty$ cat bytecodes/28.m 
 push 72
 pchar
 julien@ubuntu:~/monty$ ./monty bytecodes/28.m 
 H
-julien@ubuntu:~/monty$
-Repo:
-
-GitHub repository: monty
+julien@ubuntu:~/monty$`
   
-12. pstr
-#advanced
-Score: 100.0% (Checks completed: 100.0%)
-Implement the pstr opcode.
-
 The pstr opcode
-
-The opcode pstr prints the string starting at the top of the stack, followed by a new line.
-
-Usage: pstr
-The integer stored in each element of the stack is treated as the ascii value of the character to be printed
-The string stops when either:
-the stack is over
-the value of the element is 0
-the value of the element is not in the ascii table
-If the stack is empty, print only a new line
-julien@ubuntu:~/monty$ cat bytecodes/31.m 
+* The opcode pstr prints the string starting at the top of the stack, followed by a new line.
+* Usage: pstr
+* The integer stored in each element of the stack is treated as the ascii value of * the character to be printed
+* The string stops when either:
+  * the stack is over
+  * the value of the element is 0
+  * the value of the element is not in the ascii table
+* If the stack is empty, print only a new line
+`julien@ubuntu:~/monty$ cat bytecodes/31.m 
 push 1
 push 2
 push 3
@@ -366,24 +343,14 @@ push 83
 pstr
 julien@ubuntu:~/monty$ ./monty bytecodes/31.m 
 School
-julien@ubuntu:~/monty$ 
-Repo:
-
-GitHub repository: monty
-  
-13. rotl
-#advanced
-Score: 100.0% (Checks completed: 100.0%)
-Implement the rotl opcode.
+julien@ubuntu:~/monty$ `
 
 The rotl opcode
-
-The opcode rotl rotates the stack to the top.
-
-Usage: rotl
-The top element of the stack becomes the last one, and the second top element of the stack becomes the first one
-rotl never fails
-julien@ubuntu:~/monty$ cat bytecodes/35.m 
+* The opcode rotl rotates the stack to the top.
+* Usage: rotl
+* The top element of the stack becomes the last one, and the second top element of the stack becomes the first one
+* rotl never fails
+`julien@ubuntu:~/monty$ cat bytecodes/35.m 
 push 1
 push 2
 push 3
@@ -418,47 +385,30 @@ julien@ubuntu:~/monty$ ./monty bytecodes/35.m
 2
 1
 0
-julien@ubuntu:~/monty$ 
-Repo:
-
-GitHub repository: monty
-  
-14. rotr
-#advanced
-Score: 100.0% (Checks completed: 100.0%)
-Implement the rotr opcode.
+julien@ubuntu:~/monty$ `
 
 The rotr opcode
-
-The opcode rotr rotates the stack to the bottom.
-
-Usage: rotr
-The last element of the stack becomes the top element of the stack
-rotr never fails
-Repo:
-
-GitHub repository: monty
+* The opcode rotr rotates the stack to the bottom.
+* Usage: rotr
+* The last element of the stack becomes the top element of the stack
+* rotr never fails
   
 15. stack, queue
 #advanced
 Score: 100.0% (Checks completed: 100.0%)
 Implement the stack and queue opcodes.
 
+[6-operations.c](#6-operations.c) - Implements the stack and queue opcodes
 The stack opcode
-
-The opcode stack sets the format of the data to a stack (LIFO). This is the default behavior of the program.
-
-Usage: stack
+* The opcode stack sets the format of the data to a stack (LIFO). This is the default behavior of the program.
+* Usage: stack
 The queue opcode
-
-The opcode queue sets the format of the data to a queue (FIFO).
-
-Usage: queue
-When switching mode:
-
-The top of the stack becomes the front of the queue
-The front of the queue becomes the top of the stack
-julien@ubuntu:~/monty$ cat bytecodes/47.m
+* The opcode queue sets the format of the data to a queue (FIFO).
+* Usage: queue
+* When switching mode:
+  * The top of the stack becomes the front of the queue
+  * The front of the queue becomes the top of the stack
+`julien@ubuntu:~/monty$ cat bytecodes/47.m
 queue
 push 1
 push 2
@@ -495,78 +445,40 @@ julien@ubuntu:~/monty$ ./monty bytecodes/47.m
 2
 3
 11111
-julien@ubuntu:~/monty$ 
-Repo:
-
-GitHub repository: monty
+julien@ubuntu:~/monty$ `
   
-16. Brainf*ck
-#advanced
-Score: 100.0% (Checks completed: 100.0%)
-Write a Brainf*ck script that prints School, followed by a new line.
-
-All your Brainf*ck files should be stored inside the bf sub directory
-You can install the bf interpreter to test your code: sudo apt-get install bf
-Read: Brainf*ck
-julien@ubuntu:~/monty/bf$ bf 1000-school.bf 
+[bf/1000-school.bf](bf/1000-school.bf)
+Brainf*ck script that prints School, followed by a new line.
+`julien@ubuntu:~/monty/bf$ bf 1000-school.bf 
 School
-julien@ubuntu:~/monty/bf$ 
-Repo:
+julien@ubuntu:~/monty/bf$ `
 
-GitHub repository: monty
-Directory: bf
-File: 1000-school.bf
-  
-17. Add two digits
-#advanced
-Score: 100.0% (Checks completed: 100.0%)
-Add two digits given by the user.
-
-Read the two digits from stdin, add them, and print the result
-The total of the two digits with be one digit-long (<10)
-julien@ubuntu:~/monty/bf$ bf ./1001-add.bf
+[bf/1001-add.bf](bf/1001-add.bf)
+Brainf*ck script that adds two digits given by the user.
+* Read the two digits from stdin, add them, and print the result
+* The total of the two digits with be one digit-long (<10)
+`julien@ubuntu:~/monty/bf$ bf ./1001-add.bf
 81
-9julien@ubuntu:~/monty/bf$
-Repo:
+9julien@ubuntu:~/monty/bf$`
 
-GitHub repository: monty
-Directory: bf
-File: 1001-add.bf
-  
-18. Multiplication
-#advanced
-Score: 100.0% (Checks completed: 100.0%)
+[bf/1002-mul.bf](bf/1002-mul.bf)
 Multiply two digits given by the user.
-
-Read the two digits from stdin, multiply them, and print the result
-The result of the multiplication will be one digit-long (<10)
-julien@ubuntu:~/monty/bf$ bf 1002-mul.bf
+* Read the two digits from stdin, multiply them, and print the result
+* The result of the multiplication will be one digit-long (<10)
+`julien@ubuntu:~/monty/bf$ bf 1002-mul.bf
 24
-8julien@ubuntu:~/monty/bf$
-Repo:
+8julien@ubuntu:~/monty/bf$`
 
-GitHub repository: monty
-Directory: bf
-File: 1002-mul.bf
-  
-19. Multiplication level up
-#advanced
-Score: 100.0% (Checks completed: 100.0%)
+[bf/1003-mul.bf](bf/1003-mul.bf)
 Multiply two digits given by the user.
-
-
-
-
-Read the two digits from stdin, multiply them, and print the result, followed by a new line
-julien@ubuntu:~/monty/bf$ bf 1003-mul.bf 
+* Read the two digits from stdin, multiply them, and print the result, followed by a new line
+`julien@ubuntu:~/monty/bf$ bf 1003-mul.bf 
 77
 49
-julien@ubuntu:~/monty/bf$ 
-Repo:
+julien@ubuntu:~/monty/bf$ `
 
-GitHub repository: monty
-Directory: bf
-File: 1003-mul.bf
+comments
+Every good language comes with the capability of commenting. When the first non-space character of a line is #, treat this line as a comment (don’t do anything)
 
 ## Bugs
 No Known Bugs at this time.
